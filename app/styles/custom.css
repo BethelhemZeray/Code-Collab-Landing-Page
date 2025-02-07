@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* globals.css or any CSS file included in _app.js */
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-cursor {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+@keyframes close {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.animate-typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation:
+    typing 0.5s steps(40, end) forwards,
+    blink-cursor 1s step-end infinite;
+}
+
+.animate-close {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  animation:
+    close 0.5s steps(40, end) forwards;
+}
+
+
+/* Glow Effect to Glow Card */
+.hover-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(65, 149, 252, 0.4),
+    transparent 40%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.hover-glow:hover::before {
+  opacity: 1;
+}
+
+/* Ensure the inner content is above the glow */
+.hover-glow > div {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glow Effect to Glow Card */
+.hover-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    350px circle at var(--mouse-x) var(--mouse-y),
+    rgba(74, 155, 255, 0.994),
+    transparent 40%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.hover-card:hover::before {
+  opacity: 1;
+}
+
+/* Ensure the inner content is above the glow */
+.hover-card > div {
+  position: relative;
+  z-index: 2;
+}
+
+/* button return to top */
+.button-return {
+  z-index: 100;
+}
