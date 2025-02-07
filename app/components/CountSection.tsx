@@ -12,8 +12,8 @@ const CountSection = () => {
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 rounded-lg">
       {counts.map((count) => (
-        // <CounterCard key={count.id} count={count} />
-        <GlowCard key={count.id} count={count} />
+        <CounterCard key={count.id} count={count} />
+        //<GlowCard key={count.id} count={count} />
       ))}
     </div>
   );
