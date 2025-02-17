@@ -2,27 +2,27 @@ import { TNavLink } from "./type";
 
 export const navLinks: TNavLink[] = [
   {
-    id: "about",
-    title: "About",
+    id: "product",
+    title: "Product",
   },
   {
-    id: "experience",
-    title: "Experience",
+    id: "solutions",
+    title: "Solutions",
   },
   {
-    id: "projects",
-    title: "Projects",
+    id: "resources",
+    title: "Resources",
   },
   {
-    id: "tech",
-    title: "Tech",
+    id: "open source",
+    title: "Open Source",
   },
   {
-    id: "work",
-    title: "Work",
+    id: "enterprise",
+    title: "Enterprise",
   },
   {
-    id: "contact",
-    title: "Contact",
+    id: "pricing",
+    title: "Pricing",
   },
 ];

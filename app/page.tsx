@@ -1,13 +1,14 @@
 import ProjectsSection from "./projects/page";
 import Blog from "./blog/page";
 import HeroSection from "./hero/page";
-import AboutSection from "./about/page";
+import FeatureSection from "./Feature/page";
+//import CountSection from "./components/CountSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-900 text-white">
+    <main className="min-h-screen bg-dark text-white">
       <HeroSection />
-      <AboutSection />
+      <FeatureSection />
       <ProjectsSection />
       <Blog />
     </main>

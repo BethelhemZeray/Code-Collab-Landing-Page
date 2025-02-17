@@ -1,4 +1,4 @@
-import CountSection from "../components/CountSection";
+//import CountSection from "../components/CountSection";
 import ExperianceCard from "../components/ExperianceCard";
 
 const AboutSection = () => {
@@ -12,11 +12,11 @@ const AboutSection = () => {
         </p>
       </div>
       <div className="flex flex-col lg:flex-row items-top justify-center lg:justify-between h-full space-y-10 lg:space-y-0 py-4">
-        <div className="lg:w-1/2 text-left lg:p-6 mt-8 lg:mt-0 rounded-lg backdrop-blur-sm">
+        <div className="lg:w-3/4 text-left lg:p-6 mt-8 lg:mt-0 rounded-lg backdrop-blur-sm">
           <ExperianceCard />
         </div>
         <div className="lg:w-1/2 w-full flex justify-center lg:p-6 items-center ">
-          <CountSection />
+          {/* <CountSection /> */}
         </div>
       </div>
     </section>
