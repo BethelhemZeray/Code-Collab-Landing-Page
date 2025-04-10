@@ -1,16 +1,25 @@
-import ProjectsSection from "./projects/page";
-import Blog from "./blog/page";
+
 import HeroSection from "./hero/page";
-import FeatureSection from "./Feature/page";
-//import CountSection from "./components/CountSection";
+import FeatureSection from "./overview/page";
+import ImageSection from "./imagecontainer/image";
+import InfoCard from "./components/InfoCard";
+import CoreValues from "./Services/liveEditorService/corevalueCard";
+import Faq from "./components/frequently";
+import TestimonialSection from "./components/testimonal";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-dark text-white">
+    <main className="w-full min-h-screen">
       <HeroSection />
+      <ImageSection />
+      <InfoCard />
+      <CoreValues />
       <FeatureSection />
-      <ProjectsSection />
-      <Blog />
+      <TestimonialSection/>
+      <Faq/>
+      
+      
+  
     </main>
   );
 }

@@ -1,44 +1,77 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
 import { navLinks } from "../constants/navLinks";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"; 
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDropdown = (title: string) => {
+    setActiveDropdown(activeDropdown === title ? null : title);
   };
 
   return (
     <>
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-40">
-        <div className="container mx-auto px-8 py-4 flex items-center justify-between">
-          {/* Logo (Prevents Breaking into Two Lines) */}
+        <div className="w-full mx-auto px-8 py-4 flex items-center justify-between">
+          {/* Logo */}
           <Link href="/" className="text-2xl font-bold text-white whitespace-nowrap">
             Code Collab
           </Link>
 
-          {/* Navigation Links (Desktop Only - Aligned Right) */}
+          {/* Navigation Links (Desktop) */}
           <ul className="hidden lg:flex space-x-8 ml-auto">
             {navLinks.map((link) => (
-              <li key={link.id}>
-                <Link
-                  href={`#${link.id}`}
-                  className="text-gray-300 hover:text-white transition-colors duration-300"
-                >
-                  {link.title}
-                </Link>
+              <li key={link.title} className="relative group">
+                {link.dropdown ? (
+                  <div>
+                    <button
+                      className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300 focus:outline-none"
+                      onClick={() => toggleDropdown(link.title)}
+                    >
+                      {link.title}
+                      {activeDropdown === link.title ? <FaChevronUp /> : <FaChevronDown />}
+                    </button>
+                    <ul
+                      className={`absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-lg transition-all duration-500 ease-in-out overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-96 max-h-0 p-4`}
+                    >
+                      {link.dropdown.map((service) => (
+                        <li key={service.title}>
+                          <Link
+                            href={service.href}
+                            className="block px-4 py-2 text-gray-900 rounded-lg hover:bg-gray-800 hover:text-white"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {service.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <Link
+                    href={`#${link.title}`}
+                    className="text-gray-300 hover:text-white transition-colors duration-300"
+                  >
+                    {link.title}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
 
-          {/* Toggle Button (Visible only on Mobile) */}
+          {/* Toggle Button (Mobile) */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden text-white bg-gray-800 p-2 rounded-md focus:outline-none"
+            className="lg:hidden text-white bg-gray-900 p-2 rounded-md focus:outline-none"
           >
             <svg
               className="w-6 h-6"
@@ -58,39 +91,56 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Sidebar Navigation (Mobile Only) */}
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 transform transition-transform duration-300 ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-64"
-        } lg:hidden`} // Sidebar is hidden on desktop
-      >
-        {/* Logo or Brand Name */}
-        <Link href="/" className="text-2xl font-bold text-white mb-8 block p-4">
-          Code Collab
-        </Link>
-
-        {/* Navigation Links (Mobile Only) */}
-        <ul className="space-y-6 p-4">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <Link
-                href={`#${link.id}`}
-                className="text-gray-300 hover:text-white transition-colors duration-300 px-3 py-6"
-                onClick={toggleMenu} // Close menu on link click
-              >
-                {link.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Overlay to Close Sidebar when Clicking Outside */}
+      {/* Mobile Sidebar */}
       {isMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={toggleMenu}
-        ></div>
+        <div className="fixed top-0 left-0 h-full w-64 bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 transform transition-transform duration-300 lg:hidden">
+          <Link href="/" className="text-2xl font-bold text-white mb-2 block p-4">
+            Code Collab
+          </Link>
+
+          <ul className="space-y-2 p-2">
+            {navLinks.map((link) => (
+              <li key={link.title} className="relative">
+                {link.dropdown ? (
+                  <>
+                    <button
+                      onClick={() => toggleDropdown(link.title)} 
+                      className="w-full flex items-center justify-between text-gray-300 hover:text-white transition-colors duration-500 px-3 py-2"
+                    >
+                      {link.title}
+                      {activeDropdown === link.title ? <FaChevronUp /> : <FaChevronDown />}
+                    </button>
+                    <ul
+                      className={`mt-2 bg-white rounded-lg shadow-lg transition-all duration-300 ease-in-out overflow-hidden ${
+                        activeDropdown === link.title ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      {link.dropdown.map((service) => (
+                        <li key={service.title}>
+                          <Link
+                            href={service.href}
+                            className="block px-4 py-2 text-gray-900 hover:bg-gray-700 hover:text-white"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            {service.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <Link
+                    href={`#${link.title}`}
+                    className="block text-gray-300 hover:text-white transition-colors duration-300 px-3 py-2"
+                    onClick={toggleMenu}
+                  >
+                    {link.title}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </>
   );

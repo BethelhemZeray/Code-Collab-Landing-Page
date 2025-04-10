@@ -45,7 +45,10 @@ export type TTechnology = Required<Omit<TCommonProps, "title">>;
 
 export type TNavLink = {
   id: string;
-} & Required<Pick<TCommonProps, "title">>;
+  title: string;
+  href?: string;
+  dropdown?: { title: string; href: string }[]; // Add this line
+};
 
 export type TService = Required<Omit<TCommonProps, "name">>;
 
@@ -81,6 +84,11 @@ export type TBlog = {
   date: string;
   link: string;
 };
+
+export type chat = {
+  title: string;
+  description: string;
+}
 
 export type TConfig = {
   html: {
