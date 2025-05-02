@@ -1,11 +1,40 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Free from "../../components/freeplan";
 import Premium from "../../components/premium";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchServices } from "@/redux/slices/serviceSlice";
 
 const GetStartedCard: React.FC = ({}) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const servicesList = useSelector(
+    (state: RootState) => state.service.services
+  ); // Access services from Redux store
+  const [isFetching, setIsFetching] = useState(true);
   const router = useRouter();
+
+  //filter free services from servicesList
+  const freeServices = servicesList.filter(
+    (service) => service.type === "free"
+  );
+  //filter premium services from servicesList
+  const premiumServices = servicesList.filter(
+    (service) => service.type === "premium"
+  );
+
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        setIsFetching(true);
+        await dispatch(fetchServices());
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    loadServices();
+  }, [dispatch]);
 
   const getStartedAsFree = () => {
     router.push("/getstarted/free");
@@ -27,11 +56,12 @@ const GetStartedCard: React.FC = ({}) => {
 
       {/* ✅ Plan Cards Container */}
       <div className="flex flex-col md:flex-row gap-6 mt-6 w-full max-w-4xl">
-        <Free onStart={getStartedAsFree}/>
-        <Premium onStart={getStartedAsPremium}/>
+        <Free onStart={getStartedAsFree} servicesList={freeServices}/>
+        <Premium onStart={getStartedAsPremium} servicesList={premiumServices}/>
       </div>
     </section>
   );
 };
 
 export default GetStartedCard;
+// Removed placeholder function as useSelector is now properly imported.

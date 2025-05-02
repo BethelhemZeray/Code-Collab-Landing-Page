@@ -5,7 +5,8 @@ import "./styles/custom.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ChatBot from "./components/ChatBox";
-
+import { Providers } from "./provider";
+import { PlanProvider } from "./context/PlanContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,10 +28,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
-        <Footer />
-        <ChatBot /> 
+        <Providers>
+          <PlanProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <ChatBot />
+          </PlanProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -1,8 +1,10 @@
 import React from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { TService } from "../constants/type";
 
 interface PremiumPlanProps {
   onStart: () => void;
+  servicesList: TService[]; 
 }
 
 const Premium: React.FC<PremiumPlanProps> = ({ onStart }) => {
