@@ -36,7 +36,7 @@ const FeaturesSection = () => {
         />
       </div>
 
-      {/* Attractive Description Below Cards */}
+
       <div className="max-w-4xl mx-auto text-center px-4 sm:px-6">
         <h3 className="text-2xl sm:text-3xl font-semibold text-blue-400 mb-4">
           Empowering Developers, Teams & Enterprises

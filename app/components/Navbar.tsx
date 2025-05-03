@@ -47,7 +47,7 @@ export default function Navbar() {
                         <li key={service.title}>
                           <Link
                             href={service.href}
-                            className="block px-4 py-2 text-gray-900 rounded-lg hover:bg-gray-800 hover:text-white"
+                            className="block px-4 py-2 text-gray-900 rounded-lg hover:bg-gray-900 hover:text-white"
                             onClick={() => setIsMenuOpen(false)}
                           >
                             {service.title}

@@ -44,7 +44,7 @@ const SecurityFAQ = () => {
                 className="w-full text-left py-4 px-6 bg-transparent text-xl font-semibold flex justify-between items-center  transition-all duration-300"
               >
                 <span>{faq.question}</span>
-                <span className="text-gray-400">
+                <span className="text-blue-500">
                   {activeIndex === index ? "-" : "+"}
                 </span>
               </button>
