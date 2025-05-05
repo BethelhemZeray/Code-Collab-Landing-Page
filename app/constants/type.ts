@@ -228,6 +228,7 @@ export type TRole =
   | "User";
 
 export type TService = {
+  id: number;
   _id?: string;
   name: string;
   description: string;
@@ -239,6 +240,7 @@ export type TService = {
   status?: "active" | "inactive";
   createdAt?: Date;
   updatedAt?: Date;
+
 };
 
 export type TOrganization = {

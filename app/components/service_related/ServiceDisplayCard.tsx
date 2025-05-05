@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { TService } from "@/app/constants/type";
 
 interface ServiceDisplayCardProps {
@@ -16,36 +16,32 @@ const ServiceDisplayCard: React.FC<ServiceDisplayCardProps> = ({
   isLast,
 }) => {
   return (
-    <div className="max-w-md mx-auto bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4 p-6">
-      <div className="p-8">
-        <div className="uppercase tracking-wide text-xl text-indigo-300 font-semibold">
-          {service.name}
-        </div>
-        <p className="mt-2 text-gray-300">{service.description}</p>
-        
-        <div className="mt-4">
-          <h3 className="text-lg font-medium text-white">Features:</h3>
-          <ul className="mt-2 list-disc list-inside text-gray-300">
-            {service.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
-        </div>
+    <div className="w-full h-full min-h-screen bg-gray-900 text-white px-8 py-12">
+      <h1 className="text-4xl font-bold text-indigo-300 mb-4">{service.name}</h1>
+      <p className="text-lg text-gray-300 mb-6">{service.description}</p>
 
-        <div className="mt-6 flex justify-between">
-          <button
-            onClick={onSkipAll}
-            className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
-          >
-            Skip All
-          </button>
-          <button
-            onClick={onNext}
-            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
-          >
-            {isLast ? "Create Account" : "Next"}
-          </button>
-        </div>
+      <div>
+        <h2 className="text-2xl font-semibold mb-3">Features:</h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-300 text-base">
+          {service.features.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-12 flex justify-between">
+        <button
+          onClick={onSkipAll}
+          className="px-6 py-3 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+        >
+          Skip All
+        </button>
+        <button
+          onClick={onNext}
+          className="px-6 py-3 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+        >
+          {isLast ? "Create Account" : "Next"}
+        </button>
       </div>
     </div>
   );
