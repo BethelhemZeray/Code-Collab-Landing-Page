@@ -371,7 +371,7 @@ const FreePlanPage = () => {
         {/* Next Button */}
         <motion.button
           onClick={handleNext}
-          className={`absolute right-6 top-1/2 -translate-y-1/2 z-20 p-4  transition-all ${
+          className={`absolute right-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full transition-all ${
             currentIndex === freeServices.length - 1
               ? "bg-gradient-to-br from-green-600/20 to-emerald-600/20 hover:from-green-600/30 hover:to-emerald-600/30"
               : "bg-gradient-to-br from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30"
