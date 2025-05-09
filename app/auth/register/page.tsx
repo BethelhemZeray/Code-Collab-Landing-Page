@@ -17,9 +17,9 @@ const RegisterPage = () => {
   }, [searchParams, setPlan]);
 
   return (
-    <div className="min-h-screen text-white p-4">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">
+    <div className="min-h-screen text-white mb-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-2xl font-bold ">
           Create Your {plan === "premium" ? "Premium" : "Free"} Account
         </h1>
         <p className="mb-4 text-gray-400">

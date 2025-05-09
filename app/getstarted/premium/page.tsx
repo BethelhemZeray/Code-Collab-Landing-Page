@@ -227,7 +227,7 @@ const PremiumPlanPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex flex-col items-center justify-center p-6 overflow-hidden text-white relative"
+      className="min-h-screen  w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex flex-col items-center justify-center p-6 overflow-hidden text-white relative"
     >
       {/* Animated gold gradient background */}
       <motion.div
@@ -284,7 +284,7 @@ const PremiumPlanPage = () => {
         className="w-full text-center mb-10 relative z-10"
       >
         <motion.div whileHover={{ scale: 1.02 }} className="inline-block mb-2">
-          <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+          <h1 className="text-5xl font-bold mt-20 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
             Premium Features
           </h1>
         </motion.div>

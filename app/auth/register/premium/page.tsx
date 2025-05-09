@@ -2,6 +2,7 @@ import React from "react";
 import { usePlan } from "@/app/context/PlanContext";
 import PricingCards from "./PremiumCard";
 import PaymentForm from "./payment";
+import { Crown } from "lucide-react";
 
 const PremiumRegisterPage = () => {
   const { plan } = usePlan();
@@ -11,7 +12,7 @@ const PremiumRegisterPage = () => {
     <>
       <div className="w-full min-h-screen  text-white p-4 flex items-center justify-center">
         <div className="w-full mx-auto bg-gray-800/50 backdrop-blur-sm rounded-xl shadow-2xl  border border-gray-700 flex">
-          {/* Plan indicator header */}
+     
           <div
             className={`${
               isPremium
@@ -19,6 +20,11 @@ const PremiumRegisterPage = () => {
                 : "bg-gray-600"
             } p-4`}
           >
+            {isPremium && (
+              <div className="flex justify-center mt-2  animate-bounce">
+                <Crown className="w-10 h-10 text-yellow-400 transition-transform duration-500 hover:scale-125" />
+              </div>
+            )}
             <h1 className="text-2xl font-bold text-center">
               Create Your {isPremium ? "Premium" : "Free"} Account
             </h1>
@@ -29,7 +35,7 @@ const PremiumRegisterPage = () => {
             </p>
           </div>
 
-          <div className="p-6 space-y-6 flex flex-col items-center justify-center">
+          <div className="p-6 space-y-6 flex flex-col items-center justify-center ">
             <form className="space-y-4">
               <div>
                 <label
@@ -110,7 +116,7 @@ const PremiumRegisterPage = () => {
                     : "bg-gray-600 hover:bg-gray-500"
                 }`}
               >
-                {isPremium ? "Next" : "Create Free Account"}
+                {isPremium ? "Next"  : "Create Free Account"}
               </button>
             </form>
 

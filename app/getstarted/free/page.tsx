@@ -88,7 +88,7 @@ const FreePlanPage = () => {
             }}
             className="mb-6"
           >
-            <Rocket size={64} className="text-indigo-400" />
+            <Rocket size={64} className="text-green-400" />
           </motion.div>
 
           <motion.div
@@ -113,7 +113,7 @@ const FreePlanPage = () => {
               Preparing Your Free Plan
             </motion.h2>
             <motion.div
-              className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
+              className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -127,7 +127,7 @@ const FreePlanPage = () => {
             transition={{ delay: 0.6 }}
           >
             <motion.div
-              className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"
+              className="h-full bg-gradient-to-r from-green-500 via-emerald-500 to-lime-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{
@@ -167,11 +167,11 @@ const FreePlanPage = () => {
               repeatType: "reverse",
             }}
           >
-            <Gift size={72} className="mx-auto text-purple-400 mb-6" />
+            <Gift size={72} className="mx-auto text-green-400 mb-6" />
           </motion.div>
 
           <motion.h2
-            className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400"
+            className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400"
             initial={{ y: -20 }}
             animate={{ y: 0 }}
             transition={{ type: "spring", stiffness: 300 }}
@@ -197,11 +197,11 @@ const FreePlanPage = () => {
             <motion.button
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 0 20px rgba(139, 92, 246, 0.5)",
+                boxShadow: "0 0 20px rgba(74, 222, 128, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
               onClick={() => router.push("/auth/register")}
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all shadow-lg flex items-center gap-2 text-lg font-medium"
+              className="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg flex items-center gap-2 text-lg font-medium"
             >
               Get Started
               <motion.span
@@ -243,10 +243,10 @@ const FreePlanPage = () => {
         }}
         style={{
           background: `linear-gradient(45deg, 
-            rgba(99, 102, 241, 0.2), 
-            rgba(168, 85, 247, 0.2), 
-            rgba(236, 72, 153, 0.2),
-            rgba(99, 102, 241, 0.2))`,
+            rgba(74, 222, 128, 0.2), 
+            rgba(52, 211, 153, 0.2), 
+            rgba(34, 197, 94, 0.2),
+            rgba(74, 222, 128, 0.2))`,
           backgroundSize: "300% 300%",
         }}
       />
@@ -285,7 +285,7 @@ const FreePlanPage = () => {
         className="w-full text-center mb-10 relative z-10"
       >
         <motion.div whileHover={{ scale: 1.02 }} className="inline-block mb-2">
-          <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+          <h1 className="text-5xl font-bold mt-20 mb-2 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400">
             Free Plan Features
           </h1>
         </motion.div>
@@ -301,7 +301,7 @@ const FreePlanPage = () => {
               key={i}
               className={`relative h-2 rounded-full transition-all duration-300 ${
                 i === currentIndex
-                  ? "w-10 bg-gradient-to-r from-indigo-500 to-purple-500"
+                  ? "w-10 bg-gradient-to-r from-green-500 to-emerald-500"
                   : "w-6 bg-gray-600"
               }`}
               whileHover={{ scale: 1.3 }}
@@ -313,7 +313,7 @@ const FreePlanPage = () => {
             >
               {i === currentIndex && (
                 <motion.span
-                  className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-xs font-bold shadow-lg"
+                  className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center text-xs font-bold shadow-lg"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring" }}
@@ -343,7 +343,7 @@ const FreePlanPage = () => {
           className={`absolute left-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full transition-all ${
             currentIndex === 0
               ? "bg-gray-700/30 cursor-not-allowed"
-              : "bg-gradient-to-br from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30 cursor-pointer"
+              : "bg-gradient-to-br from-green-600/20 to-emerald-600/20 hover:from-green-600/30 hover:to-emerald-600/30 cursor-pointer"
           } border border-gray-600/50 shadow-lg`}
           aria-label="Previous"
           disabled={currentIndex === 0}
@@ -374,7 +374,7 @@ const FreePlanPage = () => {
           className={`absolute right-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full transition-all ${
             currentIndex === freeServices.length - 1
               ? "bg-gradient-to-br from-green-600/20 to-emerald-600/20 hover:from-green-600/30 hover:to-emerald-600/30"
-              : "bg-gradient-to-br from-indigo-600/20 to-purple-600/20 hover:from-indigo-600/30 hover:to-purple-600/30"
+              : "bg-gradient-to-br from-green-600/20 to-emerald-600/20 hover:from-green-600/30 hover:to-emerald-600/30"
           } border border-gray-600/50 shadow-lg`}
           aria-label="Next"
           onHoverStart={() =>
@@ -428,7 +428,7 @@ const FreePlanPage = () => {
           >
             {/* Decorative elements */}
             <motion.div
-              className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500"
+              className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -443,7 +443,7 @@ const FreePlanPage = () => {
                 whileHover={{ scale: 1.02 }}
                 className="inline-block mb-8"
               >
-                <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+                <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400">
                   {freeServices[currentIndex].name}
                 </h2>
               </motion.div>
@@ -492,7 +492,7 @@ const FreePlanPage = () => {
                           repeatType: "reverse",
                         }}
                       >
-                        <Zap className="text-yellow-400" size={24} />
+                        <Zap className="text-green-400" size={24} />
                       </motion.span>
                       Included Features
                     </h3>
@@ -548,7 +548,7 @@ const FreePlanPage = () => {
         <motion.button
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 25px rgba(139, 92, 246, 0.7)",
+            boxShadow: "0 0 25px rgba(74, 222, 128, 0.7)",
           }}
           whileTap={{ scale: 0.95 }}
           onClick={handleSkipAll}
@@ -556,7 +556,7 @@ const FreePlanPage = () => {
             setIsHovering((prev) => ({ ...prev, skip: true }))
           }
           onHoverEnd={() => setIsHovering((prev) => ({ ...prev, skip: false }))}
-          className="px-10 py-5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all shadow-xl text-lg font-medium flex items-center gap-3 relative overflow-hidden"
+          className="px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all shadow-xl text-lg font-medium flex items-center gap-3 relative overflow-hidden"
         >
           {/* Button shine effect */}
           {isHovering.skip && (

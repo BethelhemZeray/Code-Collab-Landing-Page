@@ -7,7 +7,7 @@ import { fetchServices } from "@/redux/slices/serviceSlice";
 const PremiumCard = () => {
   const dispatch = useDispatch<AppDispatch>();
   const services = useSelector((state: RootState) => state.service.services);
-  const [selectedServices, setSelectedServices] = useState<number[]>([]);
+  const [selectedServices, setSelectedServices] = useState<Record<string, boolean>>({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -21,21 +21,34 @@ const PremiumCard = () => {
       }
     };
 
-    if(services.length === 0 ){
+    if(services.length === 0) {
       loadServices();
-    } 
-  }, [dispatch]);
+    } else {
+      // Initialize selectedServices state using _id (string)
+      const initialSelection = services.reduce((acc, service) => {
+        if (service._id) {
+          acc[service._id] = false;
+        }
+        return acc;
+      }, {} as Record<string, boolean>);
+      setSelectedServices(initialSelection);
+    }
+  }, [dispatch, services.length]);
 
-  const handleCheckboxChange = (id: number) => {
-    setSelectedServices((prev) =>
-      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
-    );
+  const handleServiceSelection = (serviceId: string) => {
+    setSelectedServices(prev => ({
+      ...prev,
+      [serviceId]: !prev[serviceId]
+    }));
   };
 
   const calculateTotal = () => {
-    return selectedServices.reduce((total, serviceId) => {
-      const service = services.find(s => s.id === serviceId);
-      return total + (service?.price || 0);
+    return Object.entries(selectedServices).reduce((total, [id, isSelected]) => {
+      if (isSelected) {
+        const service = services.find(s => s._id === id);
+        return total + (service?.price || 0);
+      }
+      return total;
     }, 0);
   };
 
@@ -50,75 +63,79 @@ const PremiumCard = () => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6">
-      {/* Services Selection - now with height determined by content */}
-      <div className="p-6 rounded-xl shadow-md bg-yellow-400 lg:flex-1">  
-        <h2 className="text-2xl font-bold text-yellow-700 mb-6 text-center">Choose Premium Services</h2>
+    <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+      {/* Services Selection */}
+      <div className="p-6 rounded-xl shadow-md bg-yellow-700 lg:flex-1 w-full lg:w-[60%] ">  
+        <h2 className="text-2xl font-bold text-yellow-500 mb-6 text-center">Choose Premium Services</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {premiumServices.map((service) => (
             <div
-              key={service.id}
+              key={service._id}
               className={`bg-gray-800 border w-full border-gray-700 rounded-lg p-4 flex flex-col justify-between transition-all ${
-                selectedServices.includes(service.id) ? "ring-2 ring-yellow-500" : ""
+                service._id && selectedServices[service._id] ? "ring-2 ring-yellow-500" : ""
               }`}
             >
               <div className="flex items-center space-x-3">
                 <input
                   type="checkbox"
+                  id={`service-${service._id}`}
                   className="form-checkbox h-5 w-5 text-yellow-500 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500"
-                  checked={selectedServices.includes(service.id)}
-                  onChange={() => handleCheckboxChange(service.id)}
+                  checked={selectedServices[service._id ?? ""] || false}
+                  onChange={() => handleServiceSelection(service._id ?? "")}
                 />
-                <h3 className="text-xl font-semibold text-yellow-700">{service.name}</h3>
+                <label 
+                  htmlFor={`service-${service._id}`} 
+                  className="text-xl font-semibold text-yellow-700 cursor-pointer"
+                >
+                  {service.name}
+                </label>
               </div>
 
               <p className="text-yellow-400 text-lg font-bold mt-2">
-                {service.price ? `$${service.price}` : "Custom Pricing"}
+                {service.price ? `$${service.price.toFixed(2)}` : "Custom Pricing"}
               </p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Price Summary Box - now matching height of services container */}
-      <div className="w-full lg:w-80 bg-gray-800 p-6 rounded-xl border border-gray-700 h-full">
-        <div className="h-full flex flex-col">
+      {/* Order Summary */}
+      <div className="w-full lg:w-[35%] flex flex-col"> 
+        <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 flex-grow">
           <h3 className="text-xl font-bold text-yellow-400 mb-4">Order Summary</h3>
           
-          {/* Selected Services List */}
-          <div className="flex-grow overflow-y-auto mb-4">
-            {selectedServices.length > 0 ? (
-              selectedServices.map(serviceId => {
-                const service = services.find(s => s.id === serviceId);
-                return (
-                  <div key={serviceId} className="flex justify-between py-2 border-b border-gray-700">
-                    <span className="text-gray-300">{service?.name}</span>
-                    <span className="text-white">${service?.price || 0}</span>
+          <div className="h-[calc(100%-120px)] overflow-y-auto mb-4">
+            {Object.values(selectedServices).some(isSelected => isSelected) ? (
+              premiumServices
+                .filter(service => service._id && selectedServices[service._id])
+                .map(service => (
+                  <div key={service._id} className="flex justify-between py-2 border-b border-gray-700">
+                    <span className="text-gray-300">{service.name}</span>
+                    <span className="text-white">${service.price?.toFixed(2) || "0.00"}</span>
                   </div>
-                );
-              })
+                ))
             ) : (
               <div className="h-full flex items-center justify-center">
-                <p className="text-gray-400 text-center py-4">No services selected</p>
+                <p className="text-gray-400">No services selected</p>
               </div>
             )}
           </div>
 
-          
-          <div className="w-full lg:h-80 bg-gray-800 p-6 rounded-xl border border-gray-700 flex flex-col">
+          <div className="border-t border-gray-700 pt-4">
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold text-gray-300">Total:</span>
-              <span className="text-2xl font-bold text-yellow-400">${calculateTotal().toFixed(2)}</span>
+              <span className="text-2xl font-bold text-yellow-400">
+                ${calculateTotal().toFixed(2)}
+              </span>
             </div>
           </div>
-
-          {/* Checkout Button */}
-          {selectedServices.length > 0 && (
-            <button className="w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded-lg transition">
-              Proceed to Payment
-            </button>
-          )}
         </div>
+
+        {Object.values(selectedServices).some(isSelected => isSelected) && (
+          <button className="w-full mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded-lg transition">
+            Proceed to Payment (${calculateTotal().toFixed(2)})
+          </button>
+        )}
       </div>
     </div>
   );
