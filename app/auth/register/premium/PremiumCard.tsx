@@ -33,7 +33,7 @@ const PremiumCard = () => {
       }, {} as Record<string, boolean>);
       setSelectedServices(initialSelection);
     }
-  }, [dispatch, services.length]);
+  }, [dispatch, services, services.length]);
 
   const handleServiceSelection = (serviceId: string) => {
     setSelectedServices(prev => ({
@@ -131,11 +131,11 @@ const PremiumCard = () => {
           </div>
         </div>
 
-        {Object.values(selectedServices).some(isSelected => isSelected) && (
+        {/* {Object.values(selectedServices).some(isSelected => isSelected) && (
           <button className="w-full mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded-lg transition">
             Proceed to Payment (${calculateTotal().toFixed(2)})
           </button>
-        )}
+        )} */}
       </div>
     </div>
   );

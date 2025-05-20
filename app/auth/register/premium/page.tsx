@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useRef } from "react";
 import { usePlan } from "@/app/context/PlanContext";
 import PricingCards from "./PremiumCard";
 import PaymentForm from "./payment";
@@ -7,21 +8,42 @@ import { Crown } from "lucide-react";
 const PremiumRegisterPage = () => {
   const { plan } = usePlan();
   const isPremium = plan === "premium";
+  const pricingCardsRef = useRef<HTMLDivElement>(null);
+  const paymentFormRef = useRef<HTMLDivElement>(null);
+
+  const handleNextClick = (section: 'pricing' | 'payment') => {
+    // Log all input values before scrolling
+    const name = (document.getElementById('name') as HTMLInputElement)?.value;
+    const email = (document.getElementById('email') as HTMLInputElement)?.value;
+    const password = (document.getElementById('password') as HTMLInputElement)?.value;
+    const terms = (document.getElementById('terms') as HTMLInputElement)?.checked;
+
+    console.log('Form values:', {
+      name,
+      email,
+      password,
+      agreedToTerms: terms
+    });
+
+    // Scroll to the appropriate section
+    if (section === 'pricing' && pricingCardsRef.current) {
+      pricingCardsRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (section === 'payment' && paymentFormRef.current) {
+      paymentFormRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
-      <div className="w-full min-h-screen  text-white p-4 flex items-center justify-center">
-        <div className="w-full mx-auto bg-gray-800/50 backdrop-blur-sm rounded-xl shadow-2xl  border border-gray-700 flex">
-     
-          <div
-            className={`${
-              isPremium
-                ? "bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-500"
-                : "bg-gray-600"
-            } p-4`}
-          >
+      <div className="w-full min-h-screen text-white p-4 flex items-center justify-center">
+        <div className="w-full mx-auto bg-gray-800/50 backdrop-blur-sm rounded-xl shadow-2xl border border-gray-700 flex">
+          <div className={`${
+            isPremium
+              ? "bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-500"
+              : "bg-gray-600"
+          } p-4`}>
             {isPremium && (
-              <div className="flex justify-center mt-2  animate-bounce">
+              <div className="flex justify-center mt-2 animate-bounce">
                 <Crown className="w-10 h-10 text-yellow-400 transition-transform duration-500 hover:scale-125" />
               </div>
             )}
@@ -35,13 +57,10 @@ const PremiumRegisterPage = () => {
             </p>
           </div>
 
-          <div className="p-6 space-y-6 flex flex-col items-center justify-center ">
-            <form className="space-y-4">
+          <div className="p-6 space-y-6 flex flex-col items-center justify-center">
+            <form className="space-y-4 w-full">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-1 text-gray-300"
-                >
+                <label htmlFor="name" className="block text-sm font-medium mb-1 text-gray-300">
                   Full Name
                 </label>
                 <input
@@ -54,10 +73,7 @@ const PremiumRegisterPage = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-1 text-gray-300"
-                >
+                <label htmlFor="email" className="block text-sm font-medium mb-1 text-gray-300">
                   Email Address
                 </label>
                 <input
@@ -70,10 +86,7 @@ const PremiumRegisterPage = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium mb-1 text-gray-300"
-                >
+                <label htmlFor="password" className="block text-sm font-medium mb-1 text-gray-300">
                   Password
                 </label>
                 <input
@@ -89,35 +102,33 @@ const PremiumRegisterPage = () => {
                 </p>
               </div>
 
-              <div className="flex items-center">
-                <input
-                  id="terms"
-                  type="checkbox"
-                  className="w-4 h-4 text-yellow-500 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500"
-                  required
-                />
-                <label htmlFor="terms" className="ml-2 text-sm text-gray-300">
-                  I agree to the{" "}
-                  <a href="#" className="text-yellow-400 hover:underline">
-                    Terms of Service
-                  </a>{" "}
-                  and{" "}
-                  <a href="#" className="text-yellow-400 hover:underline">
-                    Privacy Policy
-                  </a>
-                </label>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="terms"
+                    type="checkbox"
+                    className="w-4 h-4 text-yellow-500 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500"
+                    required
+                  />
+                  <label htmlFor="terms" className="ml-2 text-sm text-gray-300">
+                    I agree to the{" "}
+                    <a href="#" className="text-yellow-400 hover:underline">
+                      Terms of Service
+                    </a>{" "}
+                    and{" "}
+                    <a href="#" className="text-yellow-400 hover:underline">
+                      Privacy Policy
+                    </a>
+                  </label>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleNextClick('pricing')}
+                  className="ml-4 px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-medium rounded-lg transition"
+                >
+                  Next
+                </button>
               </div>
-
-              <button
-                type="submit"
-                className={`w-full py-3 px-4 rounded-lg font-semibold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-yellow-500 transition ${
-                  isPremium
-                    ? "bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800 shadow-lg shadow-yellow-500/20"
-                    : "bg-gray-600 hover:bg-gray-500"
-                }`}
-              >
-                {isPremium ? "Next"  : "Create Free Account"}
-              </button>
             </form>
 
             <p className="text-center text-sm text-gray-400">
@@ -129,10 +140,21 @@ const PremiumRegisterPage = () => {
           </div>
         </div>
       </div>
-      <div className="w-full min-h-screen text-white p-4 flex items-center justify-center">
-        <PricingCards />
+
+      <div ref={pricingCardsRef} className="w-full min-h-screen text-white p-4 flex flex-col items-center justify-center">
+        <div className="w-full max-w-4xl mb-8">
+          <PricingCards />
+        </div>
+        <button
+          type="button"
+          onClick={() => handleNextClick('payment')}
+          className="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-medium rounded-lg transition transform hover:scale-105"
+        >
+          Proceed to Payment
+        </button>
       </div>
-      <div className="w-full min-h-screen text-white p-4 flex items-center justify-center">
+
+      <div ref={paymentFormRef} className="w-full min-h-screen text-white p-4 flex items-center justify-center">
         <PaymentForm />
       </div>
     </>

@@ -15,6 +15,7 @@ export const config = {
       { name: "About Us", url: "/about" },
       { name: "Careers", url: "/careers" },
       { name: "Contact", url: "/contact" }
+      
     ],
     productLinks: [
       { name: "Features", url: "/features" }, 
@@ -22,7 +23,7 @@ export const config = {
       { name: "Integrations", url: "/integrations" }
     ],
     resourceLinks: [
-      { name: "Documentation", url: "/docs" },
+      { name: "Documentation", url: "https://code-collab-doc-oifz.vercel.app/docs/Introduction" },
       { name: "API Reference", url: "/api" },
       { name: "Community", url: "/community" }
     ],

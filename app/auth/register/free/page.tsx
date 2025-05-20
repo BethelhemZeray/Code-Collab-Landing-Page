@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePlan } from "@/app/context/PlanContext";
 
 const FreeRegisterPage = () => {
   const { plan } = usePlan();
   const isPremium = plan === "premium";
+  console.log("is free page")
+  
+  // State for form inputs
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    terms: false
+  });
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    // Here you would typically send the data to your backend
+  };
 
   return (
     <div className="w-full min-h-screen text-white p-4 flex items-center justify-center">
@@ -13,7 +38,7 @@ const FreeRegisterPage = () => {
           className={`${
             isPremium
               ? "bg-gradient-to-r from-purple-600 to-blue-600"
-              : "bg-gradient-to-r from-green-400 to-green-500"
+              : "bg-gradient-to-r from-green-600 to-green-500"
           } p-4`}
         >
           <h1 className="text-2xl font-bold text-center">
@@ -28,7 +53,7 @@ const FreeRegisterPage = () => {
 
         <div className="p-6 space-y-6">
           {/* Registration Form */}
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
@@ -42,6 +67,8 @@ const FreeRegisterPage = () => {
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition"
                 placeholder="Your Full Name"
                 required
+                value={formData.name}
+                onChange={handleChange}
               />
             </div>
 
@@ -58,6 +85,8 @@ const FreeRegisterPage = () => {
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition"
                 placeholder="youremail@example.com"
                 required
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
 
@@ -75,6 +104,8 @@ const FreeRegisterPage = () => {
                 placeholder="••••••••"
                 minLength={8}
                 required
+                value={formData.password}
+                onChange={handleChange}
               />
               <p className="mt-1 text-xs text-gray-400">
                 Minimum 8 characters
@@ -87,6 +118,8 @@ const FreeRegisterPage = () => {
                 type="checkbox"
                 className="w-4 h-4 text-green-400 bg-gray-700 border-gray-600 rounded focus:ring-green-500"
                 required
+                checked={formData.terms}
+                onChange={handleChange}
               />
               <label htmlFor="terms" className="ml-2 text-sm text-gray-300">
                 I agree to the{" "}

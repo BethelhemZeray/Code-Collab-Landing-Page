@@ -27,37 +27,37 @@ const FeatureSection = () => {
               title: "Smart File Organization",
               description:
                 "Automatically categorize and organize your code files for better structure and faster access.",
-              image: "/images/cc.jpg",
+              image: "/images/FileOrganization.jpg",
             },
             {
               title: "Version Control for Files",
               description:
                 "Track and manage every version of your code files to ensure collaboration without confusion.",
-              image: "/images/cc.jpg",
+              image: "/images/VersionControl.jpg",
             },
             {
               title: "Secure File Sharing",
               description:
                 "Share your code files with your team securely, ensuring only authorized users have access.",
-              image: "/images/cc.jpg",
+              image: "/images/SecureFolder.jpg",
             },
             {
               title: "Collaboration Tools for Teams",
               description:
                 "Collaborate with your team on files in real-time, making it easier to review and edit code together.",
-              image: "/images/cc.jpg",
+              image: "/images/Collab.jpg",
             },
             {
               title: "File Backup & Recovery",
               description:
                 "Ensure your code files are always backed up and easily recoverable in case of any data loss.",
-              image: "/images/cc.jpg",
+              image: "/images/Recovery.jpg",
             },
             {
               title: "Cloud File Integration",
               description:
                 "Seamlessly integrate your file management with the cloud for access from anywhere, anytime.",
-              image: "/images/cc.jpg",
+              image: "/images/CloudIntegration.jpg",
             },
           ].map((feature, index) => (
             <motion.div

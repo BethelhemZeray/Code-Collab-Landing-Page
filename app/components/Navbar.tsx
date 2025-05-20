@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { navLinks } from "../constants/navLinks";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa"; 
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,10 +22,13 @@ export default function Navbar() {
     <>
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-40">
-        <div className="w-full mx-auto px-8 py-4 flex items-center justify-between">
+        <div className="w-full mx-auto px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-white whitespace-nowrap">
-            Code Collab
+          <Link
+            href="/"
+            className="text-2xl font-bold text-white whitespace-nowrap"
+          >
+            <Logo />
           </Link>
 
           {/* Navigation Links (Desktop) */}
@@ -38,7 +42,11 @@ export default function Navbar() {
                       onClick={() => toggleDropdown(link.title)}
                     >
                       {link.title}
-                      {activeDropdown === link.title ? <FaChevronUp /> : <FaChevronDown />}
+                      {activeDropdown === link.title ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
                     </button>
                     <ul
                       className={`absolute left-0 mt-2 w-96 bg-white rounded-lg shadow-lg transition-all duration-500 ease-in-out overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-96 max-h-0 p-4`}
@@ -56,9 +64,18 @@ export default function Navbar() {
                       ))}
                     </ul>
                   </div>
+                ) : link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white transition-colors duration-300"
+                  >
+                    {link.title}
+                  </a>
                 ) : (
                   <Link
-                    href={`#${link.title}`}
+                    href={link.href || `#${link.title}`}
                     className="text-gray-300 hover:text-white transition-colors duration-300"
                   >
                     {link.title}
@@ -84,7 +101,9 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+                d={
+                  isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"
+                }
               />
             </svg>
           </button>
@@ -94,8 +113,11 @@ export default function Navbar() {
       {/* Mobile Sidebar */}
       {isMenuOpen && (
         <div className="fixed top-0 left-0 h-full w-64 bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 transform transition-transform duration-300 lg:hidden">
-          <Link href="/" className="text-2xl font-bold text-white mb-2 block p-4">
-            Code Collab
+          <Link
+            href="/"
+            className="text-2xl font-bold text-white mb-2 block p-4"
+          >
+            <Logo />
           </Link>
 
           <ul className="space-y-2 p-2">
@@ -104,15 +126,21 @@ export default function Navbar() {
                 {link.dropdown ? (
                   <>
                     <button
-                      onClick={() => toggleDropdown(link.title)} 
+                      onClick={() => toggleDropdown(link.title)}
                       className="w-full flex items-center justify-between text-gray-300 hover:text-white transition-colors duration-500 px-3 py-2"
                     >
                       {link.title}
-                      {activeDropdown === link.title ? <FaChevronUp /> : <FaChevronDown />}
+                      {activeDropdown === link.title ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
                     </button>
                     <ul
                       className={`mt-2 bg-white rounded-lg shadow-lg transition-all duration-300 ease-in-out overflow-hidden ${
-                        activeDropdown === link.title ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                        activeDropdown === link.title
+                          ? "max-h-96 opacity-100"
+                          : "max-h-0 opacity-0"
                       }`}
                     >
                       {link.dropdown.map((service) => (
@@ -128,9 +156,19 @@ export default function Navbar() {
                       ))}
                     </ul>
                   </>
+                ) : link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-gray-300 hover:text-white transition-colors duration-300 px-3 py-2"
+                    onClick={toggleMenu}
+                  >
+                    {link.title}
+                  </a>
                 ) : (
                   <Link
-                    href={`#${link.title}`}
+                    href={link.href || `#${link.title}`}
                     className="block text-gray-300 hover:text-white transition-colors duration-300 px-3 py-2"
                     onClick={toggleMenu}
                   >

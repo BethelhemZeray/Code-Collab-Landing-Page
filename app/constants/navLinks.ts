@@ -5,8 +5,8 @@ export const navLinks: TNavLink[] = [
     title: "Services",
     dropdown: [
       { title: "Authentication", href: "../Services/authenticationService" },
-      { title: "Chat", href: "../Services/chatService" },
-      { title: "Video Call", href: "../Services/videoService" },
+      { title: "Chat Service", href: "../Services/chatService" },
+      { title: "Video Call Service", href: "../Services/videoService" },
       { title: "File Management", href: "../Services/fileManagementService" },
       { title: "Live Editor", href: "../Services/liveEditorService" },
       { title: "Version Control", href: "../Services/versionControlService" },
@@ -19,6 +19,8 @@ export const navLinks: TNavLink[] = [
   {
     id: "docs",
     title: "Docs", 
+    href: "https://code-collab-doc-oifz.vercel.app/docs/Introduction",
+    external: true,
   },
   {
     id: "open source",

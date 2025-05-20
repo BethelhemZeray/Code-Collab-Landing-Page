@@ -8,6 +8,7 @@ import {
   FaDiscord,
   FaRegEnvelope
 } from "react-icons/fa";
+import Logo from "./Logo";
 
 export default function Footer() {
   const { 
@@ -57,8 +58,7 @@ export default function Footer() {
          
           <div className="space-y-4">
             <Link href="/" className="flex items-center">
-              {/* Replace with your logo */}
-              <span className="text-xl font-bold text-white">Logo</span>
+              <Logo/>
             </Link>
             <p className="text-gray-300 font-sans text-sm">{companyInfo.description}</p>
             <div className="flex space-x-4 pt-2">

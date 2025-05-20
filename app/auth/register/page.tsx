@@ -11,6 +11,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     const planParam = searchParams.get("plan");
+    console.log("plan: ", planParam)
     if (planParam === "free" || planParam === "premium") {
       setPlan(planParam);
     }

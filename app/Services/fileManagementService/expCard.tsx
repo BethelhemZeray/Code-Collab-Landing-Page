@@ -10,7 +10,7 @@ const ExpCard = () => {
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
             <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/file.jpg" // Replace with your image path
+                src="/images/FileOrganization.jpg" 
                 alt="Feature Image"
                 layout="fill"
                 objectFit="cover"

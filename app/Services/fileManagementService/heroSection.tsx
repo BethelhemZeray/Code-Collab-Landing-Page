@@ -1,4 +1,4 @@
-import {  FaLock, FaCloudUploadAlt, FaCode, FaUsers} from "react-icons/fa";
+import { FaCloudUploadAlt, FaCode, FaUsers} from "react-icons/fa";
 
 export default function FileManagementHero() {
   return (
@@ -96,31 +96,6 @@ export default function FileManagementHero() {
                 <span>@mention commenting</span>
               </li>
             </ul>
-          </div>
-        </div>
-
-        {/* Security & CTA Section */}
-        <div className="mt-20 max-w-4xl mx-auto">
-          <div className="bg-gray-800/20 p-8 rounded-xl border border-gray-700">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="flex-shrink-0">
-                <div className="p-4 bg-blue-900/20 rounded-full">
-                  <FaLock className="text-blue-400 text-3xl" />
-                </div>
-              </div>
-              <div>
-                <h3 className="text-2xl font-semibold mb-3">Enterprise Security</h3>
-                <p className="text-gray-300 mb-4">
-                  All files encrypted at rest and in transit with zero-knowledge architecture. SOC 2 Type II compliant with audit logging for all actions.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  
-                  <button className="border border-gray-600 hover:border-blue-400 text-gray-300 hover:text-white font-medium py-2 px-6 rounded-lg transition-colors">
-                    View Compliance Docs
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

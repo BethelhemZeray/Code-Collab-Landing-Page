@@ -3,7 +3,7 @@ import React from 'react';
 
 const EditorCLIIntro = () => {
   return (
-    <section className="w-full py-24 px-6 sm:px-12 text-white">
+    <section className="w-full  px-6 sm:px-12 text-white">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">
           Power at Your Fingertips

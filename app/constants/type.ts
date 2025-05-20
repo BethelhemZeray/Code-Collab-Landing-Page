@@ -34,6 +34,7 @@ export type TNavLink = {
   title: string;
   href?: string;
   dropdown?: { title: string; href: string }[]; // Add this line
+  external?: boolean;
 };
 
 
