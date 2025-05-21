@@ -1,6 +1,23 @@
+// constants/footer.ts
+interface Link {
+  name: string;
+  url: string;
+  icon?: string;
+}
 
+interface FooterConfig {
+  copyright: string;
+  companyInfo: {
+    description: string;
+  };
+  socialLinks: Link[];
+  quickLinks: Link[];
+  productLinks: Link[];
+  resourceLinks: Link[];
+  featureLinks?: Link[];
+}
 
-export const config = {
+export const config: { footer: FooterConfig } = {
   footer: {
     copyright: `© ${new Date().getFullYear()} Code Collab. All rights reserved.`,
     companyInfo: {
@@ -14,7 +31,6 @@ export const config = {
     quickLinks: [
       { name: "About Us", url: "/about" },
       { name: "Careers", url: "/careers" },
-      
     ],
     productLinks: [
       { name: "Features", url: "/features" }, 
@@ -26,7 +42,6 @@ export const config = {
       { name: "API Reference", url: "/api" },
       { name: "Community", url: "/community" }
     ],
-
     featureLinks: [
       { 
         name: "Live Collaboration", 
