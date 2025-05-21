@@ -14,7 +14,6 @@ export const config = {
     quickLinks: [
       { name: "About Us", url: "/about" },
       { name: "Careers", url: "/careers" },
-      { name: "Contact", url: "/contact" }
       
     ],
     productLinks: [
