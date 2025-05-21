@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from "react";
 import { usePlan } from "@/app/context/PlanContext";
 
@@ -27,6 +28,7 @@ const FreeRegisterPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+    
     // Here you would typically send the data to your backend
   };
 

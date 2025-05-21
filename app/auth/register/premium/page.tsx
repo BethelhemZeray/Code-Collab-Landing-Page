@@ -1,4 +1,4 @@
-
+'use client';
 import React, { useRef } from "react";
 import { usePlan } from "@/app/context/PlanContext";
 import PricingCards from "./PremiumCard";
