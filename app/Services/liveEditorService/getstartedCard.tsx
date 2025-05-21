@@ -12,7 +12,7 @@ const GetStartedCard: React.FC = ({}) => {
   const servicesList = useSelector(
     (state: RootState) => state.service.services
   ); // Access services from Redux store
-  const [, setIsFetching] = useState(true);
+  const [isFetching, setIsFetching] = useState(true);
   const router = useRouter();
 
   //filter free services from servicesList
